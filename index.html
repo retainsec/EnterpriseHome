@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>苏二川</title>
+    <link rel="short icon" href="Resource/icon.png">
+
+    <link rel="stylesheet" href="ExternalStyle.css">
+    <script type="text/javascript" src="CommonClass.js"></script>
+
+    <style>
+        .L_second_div{
+            text-align: center;
+        }
+        .L_second_div img{
+            margin-top: 50px;
+        }
+
+        .L_form_div{
+            width: 90%;
+            margin: 0 auto;     /* 是指上下是0，左右auto*/
+            border: 1px solid #cccccc;
+            border-radius: 5px;       /* 弧度*/
+            background: white;
+            margin-top: 30px;
+            height: 100px;
+        }
+
+        .L_form_div div span{               /* class 刚才忘了带点了  ...*/
+            font-size: 20px;
+            padding-left: 15px;
+            line-height: 50px;
+        }
+        .L_account_div {
+            height: 50px;
+            border-bottom: 1px solid #dddddd
+        }
+
+        input{
+            outline: medium;
+            background-color: transparent;
+            border: 0;
+        }
+
+        .L_login_div{
+            height: 50px;
+            background: rgb(36,92,161);
+            width: 90%;
+            border-radius: 10px;     /* 弧度更大*/
+            margin: 20px auto;     /*往中间跑*/
+            text-align: center;
+        }
+
+        .L_login_div input{
+            line-height: 50px;
+            font-size: 20px;
+            color: white;
+        }
+    </style>
+
+</head>
+<body>
+<!--网页的身体-->
+<!--第一部分   语义话标签  增加代码可读性-->
+<header class="DS_header">
+    <span>登入</span>
+</header>
+
+<!--第二部分-->
+<div class="L_second_div">
+    <img class="L_haed_img" src="Resource/head.png" alt="">
+</div>
+
+
+<!--第三部分-->
+<form>
+<div class="L_form_div">
+
+    <div class="L_account_div">
+        <span>账户名：</span>
+        <input id="L_account" type="text" name="account" value="hskj"><br>
+    </div>
+
+    <div>
+        <span>密码：</span>
+        <input id="L_pwd" type="password" name="password" value="123456"><br>
+    </div>
+
+</div>
+
+<div class="L_login_div">
+    <input type="button" value="登录" id ="btn">
+</div>
+
+
+</form>
+
+<script>
+
+    // 获取登录按钮
+    var btn = document.querySelector("#btn");
+
+    // 注册点击事件
+    btn.onclick = function () {
+        var userName = encodeURIComponent(document.querySelector("#L_account").value);
+        var password = encodeURIComponent(document.querySelector("#L_pwd").value);
+
+        var par2 = "username=" + userName + "&pwd=" + password;
+
+        requestMethod('login', par2, 'post', function (returnStr) {
+            if (returnStr == "登录成功") {
+
+                window.localStorage.setItem("userName", userName);
+
+                location.href = "DropletService.html";
+            } else {
+                alert(returnStr);
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>
